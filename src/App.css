@@ -1,0 +1,215 @@
+/* App-specific styles */
+
+.route-optimizer {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .route-optimizer {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 40vh;
+    }
+    
+    .sidebar {
+        height: auto;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+    
+    .map-container {
+        height: 40vh;
+        order: -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .route-optimizer {
+        grid-template-rows: 50vh 50vh;
+    }
+    
+    .map-container {
+        height: 50vh;
+    }
+    
+    .sidebar {
+        max-height: 50vh;
+    }
+    
+    .stats-bar {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .stat-item {
+        min-width: 80px;
+    }
+}
+
+.sidebar {
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #e2e8f0;
+    background: white;
+}
+
+.map-container {
+    height: 100vh;
+    position: relative;
+}
+
+/* Waypoint list item - compact version */
+.waypoint-item-compact {
+    display: flex;
+    align-items: center;
+    padding: 8px 4px;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    transition: all 0.2s ease;
+    min-height: 44px;
+}
+
+.waypoint-item-compact:hover {
+    background: #f1f5f9;
+}
+
+/* Route card */
+.route-card {
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: white;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.route-card:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
+
+.route-card.active {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+/* Profile toggle */
+.profile-toggle {
+    display: flex;
+    gap: 8px;
+    padding: 4px;
+    background: #f1f5f9;
+    border-radius: 8px;
+}
+
+.profile-btn {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.profile-btn.active {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    color: #0f172a;
+}
+
+.profile-btn:not(.active) {
+    color: #64748b;
+}
+
+/* Stats display */
+.stats-bar {
+    display: flex;
+    gap: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 10px;
+    color: white;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Empty state */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    text-align: center;
+    color: #64748b;
+}
+
+.empty-state svg {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+/* Waypoint number badge */
+.waypoint-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 12px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.waypoint-number.start {
+    background: #22c55e;
+}
+
+.waypoint-number.end {
+    background: #ef4444;
+}
+
+.waypoint-number.waypoint {
+    background: #3b82f6;
+}
+
+/* Mobile adjustments for dialogs */
+@media (max-width: 640px) {
+    .dialog-content-mobile {
+        max-width: 95vw !important;
+        max-height: 90vh !important;
+        overflow-y: auto;
+    }
+}
