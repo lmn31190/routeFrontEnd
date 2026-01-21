@@ -149,7 +149,7 @@ function WaypointDetailDialog({ wp, idx, isOpen, onClose, onUpdate, onDelete }) 
       <DialogContent className="sm:max-w-md max-w-[95vw] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
-            <div
+            <div 
               className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm"
               style={{ backgroundColor: currentColor }}
             >
@@ -158,13 +158,13 @@ function WaypointDetailDialog({ wp, idx, isOpen, onClose, onUpdate, onDelete }) 
             <span>Étape {idx + 1}</span>
           </DialogTitle>
         </DialogHeader>
-
+        
         <div className="space-y-4 py-2">
           {/* Name */}
           <div>
             <label className="text-sm font-medium text-slate-600 mb-1 block">Nom</label>
-            <Input
-              value={editName}
+            <Input 
+              value={editName} 
               onChange={(e) => setEditName(e.target.value)}
               placeholder="Nom de l'étape"
             />
@@ -177,8 +177,8 @@ function WaypointDetailDialog({ wp, idx, isOpen, onClose, onUpdate, onDelete }) 
               <StickyNote className="w-4 h-4" />
               Note
             </label>
-            <Textarea
-              value={editNote}
+            <Textarea 
+              value={editNote} 
               onChange={(e) => setEditNote(e.target.value)}
               placeholder="Code porte, instructions..."
               rows={2}
@@ -197,8 +197,9 @@ function WaypointDetailDialog({ wp, idx, isOpen, onClose, onUpdate, onDelete }) 
                 <button
                   key={key}
                   onClick={() => setEditColor(key)}
-                  className={`w-8 h-8 rounded-full border-2 transition-all ${editColor === key ? "border-slate-900 scale-110 ring-2 ring-offset-1 ring-slate-400" : "border-transparent hover:scale-105"
-                    }`}
+                  className={`w-8 h-8 rounded-full border-2 transition-all ${
+                    editColor === key ? "border-slate-900 scale-110 ring-2 ring-offset-1 ring-slate-400" : "border-transparent hover:scale-105"
+                  }`}
                   style={{ backgroundColor: bg }}
                   title={label}
                 />
@@ -241,7 +242,7 @@ function WaypointDetailDialog({ wp, idx, isOpen, onClose, onUpdate, onDelete }) 
               </div>
             ) : (
               <div className="flex items-center justify-between">
-                <div
+                <div 
                   className="flex items-center gap-2 px-3 py-2 rounded-md"
                   style={{ backgroundColor: `${currentColor}15` }}
                 >
@@ -294,7 +295,7 @@ function SortableWaypointItem({ wp, idx, isCurrentStop, onClick }) {
   const status = wp.status || "pending";
   const waypointColor = WAYPOINT_COLORS[wp.color || "blue"]?.bg || WAYPOINT_COLORS.blue.bg;
   const displayColor = STATUS_COLORS[status] || waypointColor;
-
+  
   const {
     attributes,
     listeners,
@@ -332,15 +333,15 @@ function SortableWaypointItem({ wp, idx, isCurrentStop, onClick }) {
       >
         <GripVertical className="w-4 h-4 text-slate-400" />
       </div>
-
-      <div
-        className="w-7 h-7 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
+      
+      <div 
+        className="w-7 h-7 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0" 
         style={{ backgroundColor: displayColor }}
       >
         {getStatusIcon()}
       </div>
-
-      <div
+      
+      <div 
         className="flex-1 min-w-0 mx-2 cursor-pointer"
         onClick={onClick}
       >
@@ -359,7 +360,7 @@ function SortableWaypointItem({ wp, idx, isCurrentStop, onClick }) {
           </div>
         )}
       </div>
-
+      
       <button
         onClick={onClick}
         className="p-1.5 hover:bg-slate-200 rounded flex-shrink-0"
@@ -394,10 +395,7 @@ export default function RouteOptimizer() {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  useEffect(() => {
-    fetchRoutes();
-  }, [fetchRoutes]);
-
+  useEffect(() => { fetchRoutes(); }, []);
 
   useEffect(() => {
     if (selectedRoute?.waypoints) {
@@ -411,7 +409,7 @@ export default function RouteOptimizer() {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (suggestionsRef.current && !suggestionsRef.current.contains(event.target) &&
-        inputRef.current && !inputRef.current.contains(event.target)) {
+          inputRef.current && !inputRef.current.contains(event.target)) {
         setShowSuggestions(false);
       }
     };
@@ -419,7 +417,7 @@ export default function RouteOptimizer() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const fetchRoutes = useCallback(async () => {
+  const fetchRoutes = async () => {
     try {
       const response = await fetch(`${API}/routes`);
       if (response.ok) {
@@ -432,8 +430,7 @@ export default function RouteOptimizer() {
     } catch (error) {
       console.error("Error fetching routes:", error);
     }
-  }, [selectedRoute]);
-
+  };
 
   const fetchSuggestions = async (text) => {
     if (!text || text.length < 3) {
@@ -795,7 +792,7 @@ export default function RouteOptimizer() {
         setSelectedRoute(updatedRoute);
         setRoutes(routes.map((r) => (r.id === updatedRoute.id ? updatedRoute : r)));
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const getMarkers = useCallback(() => {
@@ -842,7 +839,7 @@ export default function RouteOptimizer() {
     return selectedRoute.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
   }, [selectedRoute]);
 
-  const formatDistance = (m) => !m ? "-" : m >= 1000 ? `${(m / 1000).toFixed(1)} km` : `${Math.round(m)} m`;
+  const formatDistance = (m) => !m ? "-" : m >= 1000 ? `${(m/1000).toFixed(1)} km` : `${Math.round(m)} m`;
   const formatDuration = (s) => {
     if (!s) return "-";
     const h = Math.floor(s / 3600);
